@@ -9,11 +9,16 @@ import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.system.TrainSystem;
 
+import hu.bme.mit.train.interfaces.TrainBrakeLights;
+import hu.bme.mit.train.controller.TrainBrakeLightsImpl;
+
 public class TrainSystemTest {
 
 	TrainController controller;
 	TrainSensor sensor;
 	TrainUser user;
+
+	TrainBrakeLights brakeLights;
 	
 	@Before
 	public void before() {
@@ -23,6 +28,8 @@ public class TrainSystemTest {
 		user = system.getUser();
 
 		sensor.overrideSpeedLimit(50);
+
+		brakeLights = new TrainBrakeLightsImpl();
 	}
 	
 	@Test
@@ -50,5 +57,13 @@ public class TrainSystemTest {
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 	}
 
+	@Test
+    public void TestBrakeLightStates() {
+        brakeLights.setState(true);
+        Assert.assertEquals(true, brakeLights.getState());
+
+        brakeLights.setState(false);
+        Assert.assertEquals(false, brakeLights.getState());
+    }
 	
 }
