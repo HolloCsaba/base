@@ -1,5 +1,10 @@
 package hu.bme.mit.train.sensor;
 
+import java.util.Date;
+
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
@@ -9,6 +14,8 @@ public class TrainSensorImpl implements TrainSensor {
 	private TrainController controller;
 	private TrainUser user;
 	private int speedLimit = 5;
+
+	private Table<Long, Integer, Integer> table = HashBasedTable.create();
 
 	public TrainSensorImpl(TrainController controller, TrainUser user) {
 		this.controller = controller;
@@ -26,4 +33,13 @@ public class TrainSensorImpl implements TrainSensor {
 		controller.setSpeedLimit(speedLimit);
 	}
 
+	@Override
+	public void Save() {
+		table.put(System.currentTimeMillis(), user.getJoystickPosition(), controller.getReferenceSpeed());
+	}
+
+	@Override
+	public int size() {
+		return table.size();
+	}
 }

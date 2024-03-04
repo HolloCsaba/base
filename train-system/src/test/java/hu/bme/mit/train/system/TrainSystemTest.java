@@ -65,5 +65,14 @@ public class TrainSystemTest {
         brakeLights.setState(false);
         Assert.assertEquals(false, brakeLights.getState());
     }
+
+	@Test
+    public void TestTableData() {
+        sensor.Save();
+		int n = sensor.size();
+		sensor.Save();
+		
+        Assert.assertEquals(1, sensor.size() - n);
+    }
 	
 }
