@@ -70,4 +70,4 @@ The figure below illustrates this behavior using an example.
 - I am a **list**?
 - **list**
   - deeper list
-- nice format <sub>1</sub>2<sup>3</sup> :)
+- nice format <sub>1</sub>2<sup>3</sup> :) better now?
