@@ -10,6 +10,6 @@ public class TrainBrakeLightsImpl implements TrainBrakeLights {
 	public boolean getState() { return state; }
 
     @Override
-	public void setState(boolean nextstate) { state = nextstate; }
+	public void setState(boolean nextstate) { state += nextstate; }
     
 }
