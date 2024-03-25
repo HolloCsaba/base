@@ -30,5 +30,5 @@ public class TrainSystem {
 
 	public TrainBrakeLights getBrakeLights() {
 		return brakeLights;
-	}
+	}	
 }

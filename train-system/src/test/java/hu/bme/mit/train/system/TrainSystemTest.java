@@ -1,5 +1,7 @@
 package hu.bme.mit.train.system;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +75,36 @@ public class TrainSystemTest {
 		sensor.Save();
 		
         Assert.assertEquals(1, sensor.size() - n);
+    }
+
+	@Test
+    public void TestIteration() {
+		sensor.overrideSpeedLimit(10);
+
+		Assert.assertEquals(0, controller.getReferenceSpeed());
+		
+		user.overrideJoystickPosition(5);
+
+		controller.start();
+		
+		try {
+			TimeUnit.MILLISECONDS.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(5, controller.getReferenceSpeed());
+		try {
+			TimeUnit.MILLISECONDS.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(10, controller.getReferenceSpeed());
+		try {
+			TimeUnit.MILLISECONDS.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(10, controller.getReferenceSpeed());
     }
 	
 }
