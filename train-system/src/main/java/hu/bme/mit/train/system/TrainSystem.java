@@ -1,5 +1,8 @@
 package hu.bme.mit.train.system;
 
+import java.io.*;
+import java.util.*;
+
 import hu.bme.mit.train.controller.TrainControllerImpl;
 import hu.bme.mit.train.controller.TrainBrakeLightsImpl;
 import hu.bme.mit.train.interfaces.TrainController;
@@ -9,12 +12,13 @@ import hu.bme.mit.train.sensor.TrainSensorImpl;
 import hu.bme.mit.train.user.TrainUserImpl;
 import hu.bme.mit.train.interfaces.TrainBrakeLights;
 
-public class TrainSystem {
+public class TrainSystem{
 
 	private TrainBrakeLights brakeLights = new TrainBrakeLightsImpl();
 	private TrainController controller = new TrainControllerImpl(brakeLights);
 	private TrainUser user = new TrainUserImpl(controller);
 	private TrainSensor sensor = new TrainSensorImpl(controller, user);
+	public boolean van = true;
 
 	public TrainController getController() {
 		return controller;
@@ -30,5 +34,20 @@ public class TrainSystem {
 
 	public TrainBrakeLights getBrakeLights() {
 		return brakeLights;
+	}
+
+	public void Init() throws Exception
+
+ 
+	{
+		new Thread(() -> {try{run();}catch(Exception e){}}).start();
+	}
+
+	public void run() throws Exception
+	{
+		while(van)
+		{
+			controller.followSpeed();
+		}
 	}
 }
