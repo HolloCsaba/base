@@ -1,5 +1,7 @@
 package hu.bme.mit.train.controller;
 
+import java.util.concurrent.TimeUnit;
+
 import hu.bme.mit.train.controller.TrainControllerImpl;
 import hu.bme.mit.train.interfaces.TrainBrakeLights;
 import hu.bme.mit.train.interfaces.TrainController;
@@ -54,4 +56,22 @@ public class TrainControllerImpl implements TrainController {
 		this.brakeLights = brakeLights;
 	}
 
+	@Override
+	public void start() {
+		new Thread(() -> {
+
+			while (true) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				tick();				
+			}
+		}).start();
+	}
+
+	private void tick() {
+		followSpeed();
+	}
 }
