@@ -1,5 +1,7 @@
 package hu.bme.mit.train.system;
 
+import java.util.*;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,5 +76,14 @@ public class TrainSystemTest {
 		
         Assert.assertEquals(1, sensor.size() - n);
     }
+
+	@Test
+	public void TestThread() throws Exception
+	{
+		TrainSystem system = new TrainSystem();
+		system.Init();
+		Thread.sleep(1000);
+		Assert.assertTrue(system.van);
+	}
 	
 }
