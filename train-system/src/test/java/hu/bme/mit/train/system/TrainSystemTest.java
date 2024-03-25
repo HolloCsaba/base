@@ -88,19 +88,19 @@ public class TrainSystemTest {
 		controller.start();
 		
 		try {
-			TimeUnit.MILLISECONDS.sleep(1500);
+			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		Assert.assertEquals(5, controller.getReferenceSpeed());
 		try {
-			TimeUnit.MILLISECONDS.sleep(1000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		Assert.assertEquals(10, controller.getReferenceSpeed());
 		try {
-			TimeUnit.MILLISECONDS.sleep(1000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
